@@ -67,7 +67,7 @@ cdef void close_file(FILE* fp):
 
 cdef char* read_text_file(FILE* pf, int size):
     cdef char* text
-    cdef int c, id
+    cdef int c, i
     text = <char*>malloc(size+1)
     i = 0
     while True:
@@ -81,7 +81,7 @@ cdef char* read_text_file(FILE* pf, int size):
 
 cdef char* read_binary_file(FILE* pf, int size):
     cdef char* text
-    cdef int c, id
+    cdef int c, i
     text = <char*>malloc(size+1)
     i = 0
     while True:
