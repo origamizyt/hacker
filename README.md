@@ -41,3 +41,6 @@ Pandas hack:
 import hack_core
 hack_core.hack_pandas()
 ```
+
+Make sure you run this snippet in a separate file, rather than from the interpreter,
+as the program reads data from standard input stream.
