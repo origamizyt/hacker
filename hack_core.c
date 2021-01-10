@@ -1171,34 +1171,31 @@ static const char __pyx_k_d[] = "d";
 static const char __pyx_k_f[] = "f";
 static const char __pyx_k_h[] = "h";
 static const char __pyx_k_s[] = "s";
-static const char __pyx_k__2[] = "\\";
 static const char __pyx_k_fn[] = "fn";
 static const char __pyx_k_fp[] = "fp";
 static const char __pyx_k_re[] = "re";
 static const char __pyx_k_sys[] = "sys";
-static const char __pyx_k_xls[] = ".xls";
+static const char __pyx_k_xfn[] = "xfn";
 static const char __pyx_k_argv[] = "argv";
-static const char __pyx_k_data[] = "..\\..\\data\\";
 static const char __pyx_k_hack[] = "hack";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_fopen[] = "fopen";
 static const char __pyx_k_print[] = "print";
-static const char __pyx_k_xls_2[] = "*.xls";
 static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_hack_core[] = "hack_core";
 static const char __pyx_k_hack_pandas[] = "hack_pandas";
 static const char __pyx_k_hack_core_pyx[] = "hack_core.pyx";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static PyObject *__pyx_kp_b__2;
 static PyObject *__pyx_n_s_argv;
 static PyObject *__pyx_n_s_b;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_d;
-static PyObject *__pyx_kp_b_data;
 static PyObject *__pyx_n_s_f;
 static PyObject *__pyx_n_s_fn;
+static PyObject *__pyx_n_s_fopen;
 static PyObject *__pyx_n_s_fp;
 static PyObject *__pyx_n_s_h;
 static PyObject *__pyx_n_s_hack;
@@ -1213,16 +1210,15 @@ static PyObject *__pyx_n_s_re;
 static PyObject *__pyx_n_s_s;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_kp_b_xls;
-static PyObject *__pyx_kp_b_xls_2;
+static PyObject *__pyx_n_s_xfn;
 static PyObject *__pyx_pf_9hack_core_hack(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_int_neg_3;
 static PyObject *__pyx_slice_;
-static PyObject *__pyx_tuple__3;
-static PyObject *__pyx_tuple__5;
-static PyObject *__pyx_codeobj__4;
-static PyObject *__pyx_codeobj__6;
+static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_tuple__4;
+static PyObject *__pyx_codeobj__3;
+static PyObject *__pyx_codeobj__5;
 /* Late includes */
 
 /* "hack_core.pyx":10
@@ -1562,6 +1558,7 @@ static PyObject *__pyx_pw_9hack_core_3hack_pandas(PyObject *__pyx_self, CYTHON_U
 static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_self) {
   char __pyx_v_c[0xFFFF];
   PyObject *__pyx_v_fn = 0;
+  char __pyx_v_xfn[0x20];
   FILE *__pyx_v_fp;
   char __pyx_v_b[0x20];
   char __pyx_v_re[0x20];
@@ -1573,7 +1570,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  char *__pyx_t_3;
+  char const *__pyx_t_3;
   char const *__pyx_t_4;
   int __pyx_t_5;
   int __pyx_lineno = 0;
@@ -1581,106 +1578,135 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("hack_pandas", 0);
 
-  /* "hack_core.pyx":46
- *     cdef str fn
- *     cdef FILE* fp
+  /* "hack_core.pyx":47
+ *     cdef char xfn[0x20]
+ *     cdef FILE* fopen
  *     fn = sys.argv[0][:-3]             # <<<<<<<<<<<<<<
- *     fp = open_binary_file(fn.encode() + b'.xls')
- *     read_binary_file(fp, c)
+ *     strcpy(xfn, fn.encode())
+ *     strcat(xfn, b'.xls')
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_sys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_sys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_argv); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_argv); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_t_1, 0, -3L, NULL, NULL, &__pyx_slice_, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_t_1, 0, -3L, NULL, NULL, &__pyx_slice_, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "unicode", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 47, __pyx_L1_error)
   __pyx_v_fn = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "hack_core.pyx":47
- *     cdef FILE* fp
+  /* "hack_core.pyx":48
+ *     cdef FILE* fopen
  *     fn = sys.argv[0][:-3]
- *     fp = open_binary_file(fn.encode() + b'.xls')             # <<<<<<<<<<<<<<
- *     read_binary_file(fp, c)
- *     close_file(fp)
+ *     strcpy(xfn, fn.encode())             # <<<<<<<<<<<<<<
+ *     strcat(xfn, b'.xls')
+ *     fp = open_binary_file(xfn)
  */
   if (unlikely(__pyx_v_fn == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 47, __pyx_L1_error)
+    __PYX_ERR(0, 48, __pyx_L1_error)
   }
-  __pyx_t_2 = PyUnicode_AsEncodedString(__pyx_v_fn, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_AsEncodedString(__pyx_v_fn, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_kp_b_xls); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = __Pyx_PyBytes_AsString(__pyx_t_2); if (unlikely((!__pyx_t_3) && PyErr_Occurred())) __PYX_ERR(0, 48, __pyx_L1_error)
+  (void)(strcpy(__pyx_v_xfn, __pyx_t_3));
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyObject_AsWritableString(__pyx_t_1); if (unlikely((!__pyx_t_3) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L1_error)
-  __pyx_v_fp = __pyx_f_9hack_core_open_binary_file(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "hack_core.pyx":48
+  /* "hack_core.pyx":49
  *     fn = sys.argv[0][:-3]
- *     fp = open_binary_file(fn.encode() + b'.xls')
+ *     strcpy(xfn, fn.encode())
+ *     strcat(xfn, b'.xls')             # <<<<<<<<<<<<<<
+ *     fp = open_binary_file(xfn)
+ *     read_binary_file(fp, c)
+ */
+  (void)(strcat(__pyx_v_xfn, ((char const *)".xls")));
+
+  /* "hack_core.pyx":50
+ *     strcpy(xfn, fn.encode())
+ *     strcat(xfn, b'.xls')
+ *     fp = open_binary_file(xfn)             # <<<<<<<<<<<<<<
+ *     read_binary_file(fp, c)
+ *     close_file(fp)
+ */
+  __pyx_v_fp = __pyx_f_9hack_core_open_binary_file(__pyx_v_xfn);
+
+  /* "hack_core.pyx":51
+ *     strcat(xfn, b'.xls')
+ *     fp = open_binary_file(xfn)
  *     read_binary_file(fp, c)             # <<<<<<<<<<<<<<
  *     close_file(fp)
  *     cdef char b[0x20]
  */
   (void)(__pyx_f_9hack_core_read_binary_file(__pyx_v_fp, __pyx_v_c));
 
-  /* "hack_core.pyx":49
- *     fp = open_binary_file(fn.encode() + b'.xls')
+  /* "hack_core.pyx":52
+ *     fp = open_binary_file(xfn)
  *     read_binary_file(fp, c)
  *     close_file(fp)             # <<<<<<<<<<<<<<
  *     cdef char b[0x20]
- *     strcpy(b, b'..\\..\\data\\' + fn.encode() + b"\\")
+ *     strcpy(b, b'..\\..\\data\\')
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":51
+  /* "hack_core.pyx":54
  *     close_file(fp)
  *     cdef char b[0x20]
- *     strcpy(b, b'..\\..\\data\\' + fn.encode() + b"\\")             # <<<<<<<<<<<<<<
+ *     strcpy(b, b'..\\..\\data\\')             # <<<<<<<<<<<<<<
+ *     strcat(b, fn.encode())
+ *     strcat(b, b"\\")
+ */
+  (void)(strcpy(__pyx_v_b, ((char const *)"..\\..\\data\\")));
+
+  /* "hack_core.pyx":55
+ *     cdef char b[0x20]
+ *     strcpy(b, b'..\\..\\data\\')
+ *     strcat(b, fn.encode())             # <<<<<<<<<<<<<<
+ *     strcat(b, b"\\")
  *     cdef char re[0x20]
- *     strcpy(re, b + b'*.xls')
  */
   if (unlikely(__pyx_v_fn == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 51, __pyx_L1_error)
+    __PYX_ERR(0, 55, __pyx_L1_error)
   }
-  __pyx_t_1 = PyUnicode_AsEncodedString(__pyx_v_fn, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_kp_b_data, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_AsEncodedString(__pyx_v_fn, NULL, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyNumber_Add(__pyx_t_2, __pyx_kp_b__2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_4 = __Pyx_PyBytes_AsString(__pyx_t_2); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 55, __pyx_L1_error)
+  (void)(strcat(__pyx_v_b, __pyx_t_4));
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __Pyx_PyObject_AsString(__pyx_t_1); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 51, __pyx_L1_error)
-  (void)(strcpy(__pyx_v_b, __pyx_t_4));
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "hack_core.pyx":53
- *     strcpy(b, b'..\\..\\data\\' + fn.encode() + b"\\")
+  /* "hack_core.pyx":56
+ *     strcpy(b, b'..\\..\\data\\')
+ *     strcat(b, fn.encode())
+ *     strcat(b, b"\\")             # <<<<<<<<<<<<<<
  *     cdef char re[0x20]
- *     strcpy(re, b + b'*.xls')             # <<<<<<<<<<<<<<
+ *     strcpy(re, b)
+ */
+  (void)(strcat(__pyx_v_b, ((char const *)"\\")));
+
+  /* "hack_core.pyx":58
+ *     strcat(b, b"\\")
+ *     cdef char re[0x20]
+ *     strcpy(re, b)             # <<<<<<<<<<<<<<
+ *     strcat(re, b'*.xls')
+ *     cdef char f[0x20]
+ */
+  (void)(strcpy(__pyx_v_re, __pyx_v_b));
+
+  /* "hack_core.pyx":59
+ *     cdef char re[0x20]
+ *     strcpy(re, b)
+ *     strcat(re, b'*.xls')             # <<<<<<<<<<<<<<
  *     cdef char f[0x20]
  *     cdef char s[0x20]
  */
-  __pyx_t_1 = __Pyx_PyObject_FromString(__pyx_v_b); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyNumber_Add(__pyx_t_1, __pyx_kp_b_xls_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyBytes_AsString(__pyx_t_2); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(0, 53, __pyx_L1_error)
-  (void)(strcpy(__pyx_v_re, __pyx_t_4));
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  (void)(strcat(__pyx_v_re, ((char const *)"*.xls")));
 
-  /* "hack_core.pyx":57
+  /* "hack_core.pyx":63
  *     cdef char s[0x20]
  *     cdef _finddata_t d
  *     cdef long long h = _findfirst(re, &d)             # <<<<<<<<<<<<<<
@@ -1689,7 +1715,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
   __pyx_v_h = _findfirst(__pyx_v_re, (&__pyx_v_d));
 
-  /* "hack_core.pyx":58
+  /* "hack_core.pyx":64
  *     cdef _finddata_t d
  *     cdef long long h = _findfirst(re, &d)
  *     strcpy(f, b)             # <<<<<<<<<<<<<<
@@ -1698,7 +1724,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
   (void)(strcpy(__pyx_v_f, __pyx_v_b));
 
-  /* "hack_core.pyx":59
+  /* "hack_core.pyx":65
  *     cdef long long h = _findfirst(re, &d)
  *     strcpy(f, b)
  *     strcat(f, d.name)             # <<<<<<<<<<<<<<
@@ -1707,7 +1733,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
   (void)(strcat(__pyx_v_f, __pyx_v_d.name));
 
-  /* "hack_core.pyx":60
+  /* "hack_core.pyx":66
  *     strcpy(f, b)
  *     strcat(f, d.name)
  *     if check_binary_file(f, c):             # <<<<<<<<<<<<<<
@@ -1717,7 +1743,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
   __pyx_t_5 = (__pyx_f_9hack_core_check_binary_file(__pyx_v_f, __pyx_v_c) != 0);
   if (__pyx_t_5) {
 
-    /* "hack_core.pyx":61
+    /* "hack_core.pyx":67
  *     strcat(f, d.name)
  *     if check_binary_file(f, c):
  *         slice_string(f, 4, s)             # <<<<<<<<<<<<<<
@@ -1726,7 +1752,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
     __pyx_f_9hack_core_slice_string(__pyx_v_f, 4, __pyx_v_s);
 
-    /* "hack_core.pyx":62
+    /* "hack_core.pyx":68
  *     if check_binary_file(f, c):
  *         slice_string(f, 4, s)
  *         strcat(s, b'.out')             # <<<<<<<<<<<<<<
@@ -1735,7 +1761,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
     (void)(strcat(__pyx_v_s, ((char const *)".out")));
 
-    /* "hack_core.pyx":63
+    /* "hack_core.pyx":69
  *         slice_string(f, 4, s)
  *         strcat(s, b'.out')
  *         print_file(s)             # <<<<<<<<<<<<<<
@@ -1744,7 +1770,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
     __pyx_f_9hack_core_print_file(__pyx_v_s);
 
-    /* "hack_core.pyx":60
+    /* "hack_core.pyx":66
  *     strcpy(f, b)
  *     strcat(f, d.name)
  *     if check_binary_file(f, c):             # <<<<<<<<<<<<<<
@@ -1754,7 +1780,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
     goto __pyx_L3;
   }
 
-  /* "hack_core.pyx":65
+  /* "hack_core.pyx":71
  *         print_file(s)
  *     else:
  *         while _findnext(h, &d) == 0:             # <<<<<<<<<<<<<<
@@ -1766,7 +1792,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
       __pyx_t_5 = ((_findnext(__pyx_v_h, (&__pyx_v_d)) == 0) != 0);
       if (!__pyx_t_5) break;
 
-      /* "hack_core.pyx":66
+      /* "hack_core.pyx":72
  *     else:
  *         while _findnext(h, &d) == 0:
  *             strcpy(f, b)             # <<<<<<<<<<<<<<
@@ -1775,7 +1801,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
       (void)(strcpy(__pyx_v_f, __pyx_v_b));
 
-      /* "hack_core.pyx":67
+      /* "hack_core.pyx":73
  *         while _findnext(h, &d) == 0:
  *             strcpy(f, b)
  *             strcat(f, d.name)             # <<<<<<<<<<<<<<
@@ -1784,7 +1810,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
       (void)(strcat(__pyx_v_f, __pyx_v_d.name));
 
-      /* "hack_core.pyx":68
+      /* "hack_core.pyx":74
  *             strcpy(f, b)
  *             strcat(f, d.name)
  *             if check_text_file(f, c):             # <<<<<<<<<<<<<<
@@ -1794,7 +1820,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
       __pyx_t_5 = (__pyx_f_9hack_core_check_text_file(__pyx_v_f, __pyx_v_c) != 0);
       if (__pyx_t_5) {
 
-        /* "hack_core.pyx":69
+        /* "hack_core.pyx":75
  *             strcat(f, d.name)
  *             if check_text_file(f, c):
  *                 slice_string(f, 4, s)             # <<<<<<<<<<<<<<
@@ -1803,7 +1829,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
         __pyx_f_9hack_core_slice_string(__pyx_v_f, 4, __pyx_v_s);
 
-        /* "hack_core.pyx":70
+        /* "hack_core.pyx":76
  *             if check_text_file(f, c):
  *                 slice_string(f, 4, s)
  *                 strcat(s, b'.out')             # <<<<<<<<<<<<<<
@@ -1812,7 +1838,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
         (void)(strcat(__pyx_v_s, ((char const *)".out")));
 
-        /* "hack_core.pyx":71
+        /* "hack_core.pyx":77
  *                 slice_string(f, 4, s)
  *                 strcat(s, b'.out')
  *                 print_file(s)             # <<<<<<<<<<<<<<
@@ -1821,7 +1847,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
         __pyx_f_9hack_core_print_file(__pyx_v_s);
 
-        /* "hack_core.pyx":72
+        /* "hack_core.pyx":78
  *                 strcat(s, b'.out')
  *                 print_file(s)
  *                 break             # <<<<<<<<<<<<<<
@@ -1830,7 +1856,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
  */
         goto __pyx_L5_break;
 
-        /* "hack_core.pyx":68
+        /* "hack_core.pyx":74
  *             strcpy(f, b)
  *             strcat(f, d.name)
  *             if check_text_file(f, c):             # <<<<<<<<<<<<<<
@@ -1866,7 +1892,7 @@ static PyObject *__pyx_pf_9hack_core_2hack_pandas(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "hack_core.pyx":75
+/* "hack_core.pyx":81
  * 
  * 
  * cdef FILE* open_text_file(char* fn):             # <<<<<<<<<<<<<<
@@ -1880,7 +1906,7 @@ static FILE *__pyx_f_9hack_core_open_text_file(char *__pyx_v_fn) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("open_text_file", 0);
 
-  /* "hack_core.pyx":77
+  /* "hack_core.pyx":83
  * cdef FILE* open_text_file(char* fn):
  *     cdef FILE* fp
  *     fp = fopen(fn, "r")             # <<<<<<<<<<<<<<
@@ -1889,7 +1915,7 @@ static FILE *__pyx_f_9hack_core_open_text_file(char *__pyx_v_fn) {
  */
   __pyx_v_fp = fopen(__pyx_v_fn, ((char const *)"r"));
 
-  /* "hack_core.pyx":78
+  /* "hack_core.pyx":84
  *     cdef FILE* fp
  *     fp = fopen(fn, "r")
  *     return fp             # <<<<<<<<<<<<<<
@@ -1899,7 +1925,7 @@ static FILE *__pyx_f_9hack_core_open_text_file(char *__pyx_v_fn) {
   __pyx_r = __pyx_v_fp;
   goto __pyx_L0;
 
-  /* "hack_core.pyx":75
+  /* "hack_core.pyx":81
  * 
  * 
  * cdef FILE* open_text_file(char* fn):             # <<<<<<<<<<<<<<
@@ -1913,7 +1939,7 @@ static FILE *__pyx_f_9hack_core_open_text_file(char *__pyx_v_fn) {
   return __pyx_r;
 }
 
-/* "hack_core.pyx":80
+/* "hack_core.pyx":86
  *     return fp
  * 
  * cdef FILE* open_binary_file(char* fn):             # <<<<<<<<<<<<<<
@@ -1927,7 +1953,7 @@ static FILE *__pyx_f_9hack_core_open_binary_file(char *__pyx_v_fn) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("open_binary_file", 0);
 
-  /* "hack_core.pyx":82
+  /* "hack_core.pyx":88
  * cdef FILE* open_binary_file(char* fn):
  *     cdef FILE* fp
  *     fp = fopen(fn, "rb")             # <<<<<<<<<<<<<<
@@ -1936,7 +1962,7 @@ static FILE *__pyx_f_9hack_core_open_binary_file(char *__pyx_v_fn) {
  */
   __pyx_v_fp = fopen(__pyx_v_fn, ((char const *)"rb"));
 
-  /* "hack_core.pyx":83
+  /* "hack_core.pyx":89
  *     cdef FILE* fp
  *     fp = fopen(fn, "rb")
  *     return fp             # <<<<<<<<<<<<<<
@@ -1946,7 +1972,7 @@ static FILE *__pyx_f_9hack_core_open_binary_file(char *__pyx_v_fn) {
   __pyx_r = __pyx_v_fp;
   goto __pyx_L0;
 
-  /* "hack_core.pyx":80
+  /* "hack_core.pyx":86
  *     return fp
  * 
  * cdef FILE* open_binary_file(char* fn):             # <<<<<<<<<<<<<<
@@ -1960,7 +1986,7 @@ static FILE *__pyx_f_9hack_core_open_binary_file(char *__pyx_v_fn) {
   return __pyx_r;
 }
 
-/* "hack_core.pyx":85
+/* "hack_core.pyx":91
  *     return fp
  * 
  * cdef void close_file(FILE* fp):             # <<<<<<<<<<<<<<
@@ -1972,7 +1998,7 @@ static void __pyx_f_9hack_core_close_file(FILE *__pyx_v_fp) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("close_file", 0);
 
-  /* "hack_core.pyx":86
+  /* "hack_core.pyx":92
  * 
  * cdef void close_file(FILE* fp):
  *     fclose(fp)             # <<<<<<<<<<<<<<
@@ -1981,7 +2007,7 @@ static void __pyx_f_9hack_core_close_file(FILE *__pyx_v_fp) {
  */
   (void)(fclose(__pyx_v_fp));
 
-  /* "hack_core.pyx":85
+  /* "hack_core.pyx":91
  *     return fp
  * 
  * cdef void close_file(FILE* fp):             # <<<<<<<<<<<<<<
@@ -1993,7 +2019,7 @@ static void __pyx_f_9hack_core_close_file(FILE *__pyx_v_fp) {
   __Pyx_RefNannyFinishContext();
 }
 
-/* "hack_core.pyx":88
+/* "hack_core.pyx":94
  *     fclose(fp)
  * 
  * cdef int read_text_file(FILE* pf, char* text):             # <<<<<<<<<<<<<<
@@ -2009,7 +2035,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("read_text_file", 0);
 
-  /* "hack_core.pyx":90
+  /* "hack_core.pyx":96
  * cdef int read_text_file(FILE* pf, char* text):
  *     cdef int c, i
  *     i = 0             # <<<<<<<<<<<<<<
@@ -2018,7 +2044,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
  */
   __pyx_v_i = 0;
 
-  /* "hack_core.pyx":91
+  /* "hack_core.pyx":97
  *     cdef int c, i
  *     i = 0
  *     while True:             # <<<<<<<<<<<<<<
@@ -2027,7 +2053,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
  */
   while (1) {
 
-    /* "hack_core.pyx":92
+    /* "hack_core.pyx":98
  *     i = 0
  *     while True:
  *         c = fgetc(pf)             # <<<<<<<<<<<<<<
@@ -2036,7 +2062,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
  */
     __pyx_v_c = fgetc(__pyx_v_pf);
 
-    /* "hack_core.pyx":93
+    /* "hack_core.pyx":99
  *     while True:
  *         c = fgetc(pf)
  *         if c == EOF: break             # <<<<<<<<<<<<<<
@@ -2048,7 +2074,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
       goto __pyx_L4_break;
     }
 
-    /* "hack_core.pyx":94
+    /* "hack_core.pyx":100
  *         c = fgetc(pf)
  *         if c == EOF: break
  *         if c == b'\r': continue             # <<<<<<<<<<<<<<
@@ -2060,7 +2086,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
       goto __pyx_L3_continue;
     }
 
-    /* "hack_core.pyx":95
+    /* "hack_core.pyx":101
  *         if c == EOF: break
  *         if c == b'\r': continue
  *         text[i]=c             # <<<<<<<<<<<<<<
@@ -2069,7 +2095,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
  */
     (__pyx_v_text[__pyx_v_i]) = __pyx_v_c;
 
-    /* "hack_core.pyx":96
+    /* "hack_core.pyx":102
  *         if c == b'\r': continue
  *         text[i]=c
  *         i += 1             # <<<<<<<<<<<<<<
@@ -2081,7 +2107,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
   }
   __pyx_L4_break:;
 
-  /* "hack_core.pyx":97
+  /* "hack_core.pyx":103
  *         text[i]=c
  *         i += 1
  *     text[i]=0             # <<<<<<<<<<<<<<
@@ -2090,7 +2116,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
  */
   (__pyx_v_text[__pyx_v_i]) = 0;
 
-  /* "hack_core.pyx":98
+  /* "hack_core.pyx":104
  *         i += 1
  *     text[i]=0
  *     return i             # <<<<<<<<<<<<<<
@@ -2100,7 +2126,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
   __pyx_r = __pyx_v_i;
   goto __pyx_L0;
 
-  /* "hack_core.pyx":88
+  /* "hack_core.pyx":94
  *     fclose(fp)
  * 
  * cdef int read_text_file(FILE* pf, char* text):             # <<<<<<<<<<<<<<
@@ -2114,7 +2140,7 @@ static int __pyx_f_9hack_core_read_text_file(FILE *__pyx_v_pf, char *__pyx_v_tex
   return __pyx_r;
 }
 
-/* "hack_core.pyx":100
+/* "hack_core.pyx":106
  *     return i
  * 
  * cdef int read_binary_file(FILE* pf, char* text):             # <<<<<<<<<<<<<<
@@ -2130,7 +2156,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("read_binary_file", 0);
 
-  /* "hack_core.pyx":102
+  /* "hack_core.pyx":108
  * cdef int read_binary_file(FILE* pf, char* text):
  *     cdef int c, i
  *     i = 0             # <<<<<<<<<<<<<<
@@ -2139,7 +2165,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
  */
   __pyx_v_i = 0;
 
-  /* "hack_core.pyx":103
+  /* "hack_core.pyx":109
  *     cdef int c, i
  *     i = 0
  *     while True:             # <<<<<<<<<<<<<<
@@ -2148,7 +2174,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
  */
   while (1) {
 
-    /* "hack_core.pyx":104
+    /* "hack_core.pyx":110
  *     i = 0
  *     while True:
  *         c = fgetc(pf)             # <<<<<<<<<<<<<<
@@ -2157,7 +2183,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
  */
     __pyx_v_c = fgetc(__pyx_v_pf);
 
-    /* "hack_core.pyx":105
+    /* "hack_core.pyx":111
  *     while True:
  *         c = fgetc(pf)
  *         if c == EOF: break             # <<<<<<<<<<<<<<
@@ -2169,7 +2195,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
       goto __pyx_L4_break;
     }
 
-    /* "hack_core.pyx":106
+    /* "hack_core.pyx":112
  *         c = fgetc(pf)
  *         if c == EOF: break
  *         text[i]=c             # <<<<<<<<<<<<<<
@@ -2178,7 +2204,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
  */
     (__pyx_v_text[__pyx_v_i]) = __pyx_v_c;
 
-    /* "hack_core.pyx":107
+    /* "hack_core.pyx":113
  *         if c == EOF: break
  *         text[i]=c
  *         i += 1             # <<<<<<<<<<<<<<
@@ -2189,7 +2215,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
   }
   __pyx_L4_break:;
 
-  /* "hack_core.pyx":108
+  /* "hack_core.pyx":114
  *         text[i]=c
  *         i += 1
  *     text[i]=0             # <<<<<<<<<<<<<<
@@ -2198,7 +2224,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
  */
   (__pyx_v_text[__pyx_v_i]) = 0;
 
-  /* "hack_core.pyx":109
+  /* "hack_core.pyx":115
  *         i += 1
  *     text[i]=0
  *     return i             # <<<<<<<<<<<<<<
@@ -2208,7 +2234,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
   __pyx_r = __pyx_v_i;
   goto __pyx_L0;
 
-  /* "hack_core.pyx":100
+  /* "hack_core.pyx":106
  *     return i
  * 
  * cdef int read_binary_file(FILE* pf, char* text):             # <<<<<<<<<<<<<<
@@ -2222,7 +2248,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
   return __pyx_r;
 }
 
-/* "hack_core.pyx":111
+/* "hack_core.pyx":117
  *     return i
  * 
  * cdef char* get_stdin(int size):             # <<<<<<<<<<<<<<
@@ -2239,7 +2265,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("get_stdin", 0);
 
-  /* "hack_core.pyx":114
+  /* "hack_core.pyx":120
  *     cdef char* s
  *     cdef int c,i
  *     s = <char*>malloc(size+1)             # <<<<<<<<<<<<<<
@@ -2248,7 +2274,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
   __pyx_v_s = ((char *)malloc((__pyx_v_size + 1)));
 
-  /* "hack_core.pyx":115
+  /* "hack_core.pyx":121
  *     cdef int c,i
  *     s = <char*>malloc(size+1)
  *     i=0             # <<<<<<<<<<<<<<
@@ -2257,7 +2283,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
   __pyx_v_i = 0;
 
-  /* "hack_core.pyx":116
+  /* "hack_core.pyx":122
  *     s = <char*>malloc(size+1)
  *     i=0
  *     while True:             # <<<<<<<<<<<<<<
@@ -2266,7 +2292,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
   while (1) {
 
-    /* "hack_core.pyx":117
+    /* "hack_core.pyx":123
  *     i=0
  *     while True:
  *         c = getchar()             # <<<<<<<<<<<<<<
@@ -2275,7 +2301,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
     __pyx_v_c = getchar();
 
-    /* "hack_core.pyx":118
+    /* "hack_core.pyx":124
  *     while True:
  *         c = getchar()
  *         if c == EOF: break             # <<<<<<<<<<<<<<
@@ -2287,7 +2313,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
       goto __pyx_L4_break;
     }
 
-    /* "hack_core.pyx":119
+    /* "hack_core.pyx":125
  *         c = getchar()
  *         if c == EOF: break
  *         if c == b'\r': continue             # <<<<<<<<<<<<<<
@@ -2299,7 +2325,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
       goto __pyx_L3_continue;
     }
 
-    /* "hack_core.pyx":120
+    /* "hack_core.pyx":126
  *         if c == EOF: break
  *         if c == b'\r': continue
  *         s[i]=c             # <<<<<<<<<<<<<<
@@ -2308,7 +2334,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
     (__pyx_v_s[__pyx_v_i]) = __pyx_v_c;
 
-    /* "hack_core.pyx":121
+    /* "hack_core.pyx":127
  *         if c == b'\r': continue
  *         s[i]=c
  *         i += 1             # <<<<<<<<<<<<<<
@@ -2320,7 +2346,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
   }
   __pyx_L4_break:;
 
-  /* "hack_core.pyx":122
+  /* "hack_core.pyx":128
  *         s[i]=c
  *         i += 1
  *     s[i]=0             # <<<<<<<<<<<<<<
@@ -2329,7 +2355,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
   (__pyx_v_s[__pyx_v_i]) = 0;
 
-  /* "hack_core.pyx":123
+  /* "hack_core.pyx":129
  *         i += 1
  *     s[i]=0
  *     return s             # <<<<<<<<<<<<<<
@@ -2339,7 +2365,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
   __pyx_r = __pyx_v_s;
   goto __pyx_L0;
 
-  /* "hack_core.pyx":111
+  /* "hack_core.pyx":117
  *     return i
  * 
  * cdef char* get_stdin(int size):             # <<<<<<<<<<<<<<
@@ -2353,7 +2379,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
   return __pyx_r;
 }
 
-/* "hack_core.pyx":125
+/* "hack_core.pyx":131
  *     return s
  * 
  * cdef int check_text_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
@@ -2368,7 +2394,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("check_text_file", 0);
 
-  /* "hack_core.pyx":126
+  /* "hack_core.pyx":132
  * 
  * cdef int check_text_file(char* fn, char* expect):
  *     cdef FILE* fp = open_text_file(fn)             # <<<<<<<<<<<<<<
@@ -2377,7 +2403,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_text_file(__pyx_v_fn);
 
-  /* "hack_core.pyx":128
+  /* "hack_core.pyx":134
  *     cdef FILE* fp = open_text_file(fn)
  *     cdef char fc[0x20]
  *     read_text_file(fp, fc)             # <<<<<<<<<<<<<<
@@ -2386,7 +2412,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  */
   (void)(__pyx_f_9hack_core_read_text_file(__pyx_v_fp, __pyx_v_fc));
 
-  /* "hack_core.pyx":129
+  /* "hack_core.pyx":135
  *     cdef char fc[0x20]
  *     read_text_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
@@ -2395,7 +2421,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":130
+  /* "hack_core.pyx":136
  *     read_text_file(fp, fc)
  *     close_file(fp)
  *     return strcmp(fc, expect) == 0             # <<<<<<<<<<<<<<
@@ -2405,7 +2431,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
   __pyx_r = (strcmp(__pyx_v_fc, __pyx_v_expect) == 0);
   goto __pyx_L0;
 
-  /* "hack_core.pyx":125
+  /* "hack_core.pyx":131
  *     return s
  * 
  * cdef int check_text_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
@@ -2419,7 +2445,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
   return __pyx_r;
 }
 
-/* "hack_core.pyx":132
+/* "hack_core.pyx":138
  *     return strcmp(fc, expect) == 0
  * 
  * cdef int check_binary_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
@@ -2434,7 +2460,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("check_binary_file", 0);
 
-  /* "hack_core.pyx":133
+  /* "hack_core.pyx":139
  * 
  * cdef int check_binary_file(char* fn, char* expect):
  *     cdef FILE* fp = open_binary_file(fn)             # <<<<<<<<<<<<<<
@@ -2443,7 +2469,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_binary_file(__pyx_v_fn);
 
-  /* "hack_core.pyx":135
+  /* "hack_core.pyx":141
  *     cdef FILE* fp = open_binary_file(fn)
  *     cdef char fc[0x400]
  *     read_binary_file(fp, fc)             # <<<<<<<<<<<<<<
@@ -2452,7 +2478,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  */
   (void)(__pyx_f_9hack_core_read_binary_file(__pyx_v_fp, __pyx_v_fc));
 
-  /* "hack_core.pyx":136
+  /* "hack_core.pyx":142
  *     cdef char fc[0x400]
  *     read_binary_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
@@ -2461,7 +2487,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":137
+  /* "hack_core.pyx":143
  *     read_binary_file(fp, fc)
  *     close_file(fp)
  *     return strcmp(fc, expect) == 0             # <<<<<<<<<<<<<<
@@ -2471,7 +2497,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   __pyx_r = (strcmp(__pyx_v_fc, __pyx_v_expect) == 0);
   goto __pyx_L0;
 
-  /* "hack_core.pyx":132
+  /* "hack_core.pyx":138
  *     return strcmp(fc, expect) == 0
  * 
  * cdef int check_binary_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
@@ -2485,7 +2511,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   return __pyx_r;
 }
 
-/* "hack_core.pyx":139
+/* "hack_core.pyx":145
  *     return strcmp(fc, expect) == 0
  * 
  * cdef void print_file(char* fn):             # <<<<<<<<<<<<<<
@@ -2504,7 +2530,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("print_file", 0);
 
-  /* "hack_core.pyx":140
+  /* "hack_core.pyx":146
  * 
  * cdef void print_file(char* fn):
  *     cdef FILE* fp = open_text_file(fn)             # <<<<<<<<<<<<<<
@@ -2513,7 +2539,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_text_file(__pyx_v_fn);
 
-  /* "hack_core.pyx":142
+  /* "hack_core.pyx":148
  *     cdef FILE* fp = open_text_file(fn)
  *     cdef char fc[0x400]
  *     read_text_file(fp, fc)             # <<<<<<<<<<<<<<
@@ -2522,7 +2548,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
  */
   (void)(__pyx_f_9hack_core_read_text_file(__pyx_v_fp, __pyx_v_fc));
 
-  /* "hack_core.pyx":143
+  /* "hack_core.pyx":149
  *     cdef char fc[0x400]
  *     read_text_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
@@ -2531,21 +2557,21 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":144
+  /* "hack_core.pyx":150
  *     read_text_file(fp, fc)
  *     close_file(fp)
  *     print(fc.decode())             # <<<<<<<<<<<<<<
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):
  */
-  __pyx_t_1 = __Pyx_decode_c_string(__pyx_v_fc, 0, strlen(__pyx_v_fc), NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_c_string(__pyx_v_fc, 0, strlen(__pyx_v_fc), NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "hack_core.pyx":139
+  /* "hack_core.pyx":145
  *     return strcmp(fc, expect) == 0
  * 
  * cdef void print_file(char* fn):             # <<<<<<<<<<<<<<
@@ -2563,7 +2589,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
   __Pyx_RefNannyFinishContext();
 }
 
-/* "hack_core.pyx":146
+/* "hack_core.pyx":152
  *     print(fc.decode())
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):             # <<<<<<<<<<<<<<
@@ -2576,7 +2602,7 @@ static void __pyx_f_9hack_core_slice_string(char *__pyx_v_s, size_t __pyx_v_off,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("slice_string", 0);
 
-  /* "hack_core.pyx":147
+  /* "hack_core.pyx":153
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):
  *     cdef size_t l = strlen(s) - off             # <<<<<<<<<<<<<<
@@ -2585,7 +2611,7 @@ static void __pyx_f_9hack_core_slice_string(char *__pyx_v_s, size_t __pyx_v_off,
  */
   __pyx_v_l = (strlen(__pyx_v_s) - __pyx_v_off);
 
-  /* "hack_core.pyx":148
+  /* "hack_core.pyx":154
  * cdef void slice_string(char* s, size_t off, char* dst):
  *     cdef size_t l = strlen(s) - off
  *     strncpy(dst, s, l)             # <<<<<<<<<<<<<<
@@ -2593,14 +2619,14 @@ static void __pyx_f_9hack_core_slice_string(char *__pyx_v_s, size_t __pyx_v_off,
  */
   (void)(strncpy(__pyx_v_dst, __pyx_v_s, __pyx_v_l));
 
-  /* "hack_core.pyx":149
+  /* "hack_core.pyx":155
  *     cdef size_t l = strlen(s) - off
  *     strncpy(dst, s, l)
  *     dst[l] = 0             # <<<<<<<<<<<<<<
  */
   (__pyx_v_dst[__pyx_v_l]) = 0;
 
-  /* "hack_core.pyx":146
+  /* "hack_core.pyx":152
  *     print(fc.decode())
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):             # <<<<<<<<<<<<<<
@@ -2658,15 +2684,14 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_b__2, __pyx_k__2, sizeof(__pyx_k__2), 0, 0, 0, 0},
   {&__pyx_n_s_argv, __pyx_k_argv, sizeof(__pyx_k_argv), 0, 0, 1, 1},
   {&__pyx_n_s_b, __pyx_k_b, sizeof(__pyx_k_b), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
-  {&__pyx_kp_b_data, __pyx_k_data, sizeof(__pyx_k_data), 0, 0, 0, 0},
   {&__pyx_n_s_f, __pyx_k_f, sizeof(__pyx_k_f), 0, 0, 1, 1},
   {&__pyx_n_s_fn, __pyx_k_fn, sizeof(__pyx_k_fn), 0, 0, 1, 1},
+  {&__pyx_n_s_fopen, __pyx_k_fopen, sizeof(__pyx_k_fopen), 0, 0, 1, 1},
   {&__pyx_n_s_fp, __pyx_k_fp, sizeof(__pyx_k_fp), 0, 0, 1, 1},
   {&__pyx_n_s_h, __pyx_k_h, sizeof(__pyx_k_h), 0, 0, 1, 1},
   {&__pyx_n_s_hack, __pyx_k_hack, sizeof(__pyx_k_hack), 0, 0, 1, 1},
@@ -2681,12 +2706,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_s, __pyx_k_s, sizeof(__pyx_k_s), 0, 0, 1, 1},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
-  {&__pyx_kp_b_xls, __pyx_k_xls, sizeof(__pyx_k_xls), 0, 0, 0, 0},
-  {&__pyx_kp_b_xls_2, __pyx_k_xls_2, sizeof(__pyx_k_xls_2), 0, 0, 0, 0},
+  {&__pyx_n_s_xfn, __pyx_k_xfn, sizeof(__pyx_k_xfn), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 150, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2714,10 +2738,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     cdef str fn
  *     cdef char* c
  */
-  __pyx_tuple__3 = PyTuple_Pack(8, __pyx_n_s_fn, __pyx_n_s_c, __pyx_n_s_b, __pyx_n_s_re, __pyx_n_s_f, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_h); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__3);
-  __Pyx_GIVEREF(__pyx_tuple__3);
-  __pyx_codeobj__4 = (PyObject*)__Pyx_PyCode_New(0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__3, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_hack_core_pyx, __pyx_n_s_hack, 10, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__4)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(8, __pyx_n_s_fn, __pyx_n_s_c, __pyx_n_s_b, __pyx_n_s_re, __pyx_n_s_f, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_h); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_hack_core_pyx, __pyx_n_s_hack, 10, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 10, __pyx_L1_error)
 
   /* "hack_core.pyx":42
  *                 break
@@ -2726,10 +2750,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     cdef char c[0xFFFF]
  *     cdef str fn
  */
-  __pyx_tuple__5 = PyTuple_Pack(9, __pyx_n_s_c, __pyx_n_s_fn, __pyx_n_s_fp, __pyx_n_s_b, __pyx_n_s_re, __pyx_n_s_f, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_h); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_hack_core_pyx, __pyx_n_s_hack_pandas, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(11, __pyx_n_s_c, __pyx_n_s_fn, __pyx_n_s_xfn, __pyx_n_s_fopen, __pyx_n_s_fp, __pyx_n_s_b, __pyx_n_s_re, __pyx_n_s_f, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_h); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_hack_core_pyx, __pyx_n_s_hack_pandas, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;

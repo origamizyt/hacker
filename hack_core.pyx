@@ -42,15 +42,21 @@ def hack():
 def hack_pandas():
     cdef char c[0xFFFF]
     cdef str fn
-    cdef FILE* fp
+    cdef char xfn[0x20]
+    cdef FILE* fopen
     fn = sys.argv[0][:-3]
-    fp = open_binary_file(fn.encode() + b'.xls')
+    strcpy(xfn, fn.encode())
+    strcat(xfn, b'.xls')
+    fp = open_binary_file(xfn)
     read_binary_file(fp, c)
     close_file(fp)
     cdef char b[0x20]
-    strcpy(b, b'..\\..\\data\\' + fn.encode() + b"\\")
+    strcpy(b, b'..\\..\\data\\')
+    strcat(b, fn.encode())
+    strcat(b, b"\\")
     cdef char re[0x20]
-    strcpy(re, b + b'*.xls')
+    strcpy(re, b)
+    strcat(re, b'*.xls')
     cdef char f[0x20]
     cdef char s[0x20]
     cdef _finddata_t d
