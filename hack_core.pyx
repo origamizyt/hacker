@@ -9,8 +9,8 @@ cimport cython
 
 def hack():
     cdef str fn
-    cdef char* c
-    c = get_stdin(0x40)
+    cdef char c[0x40]
+    get_stdin(c)
     fn = sys.argv[0][:-3]
     cdef char b[0x20]
     strcpy(b, b'..\\..\\data\\')
@@ -114,10 +114,8 @@ cdef int read_binary_file(FILE* pf, char* text):
     text[i]=0
     return i
 
-cdef char* get_stdin(int size):
-    cdef char* s
+cdef int get_stdin(char* s):
     cdef int c,i
-    s = <char*>malloc(size+1)
     i=0
     while True:
         c = getchar()
@@ -126,7 +124,7 @@ cdef char* get_stdin(int size):
         s[i]=c
         i += 1
     s[i]=0
-    return s
+    return i
 
 cdef int check_text_file(char* fn, char* expect):
     cdef FILE* fp = open_text_file(fn)

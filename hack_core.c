@@ -1154,7 +1154,7 @@ static FILE *__pyx_f_9hack_core_open_binary_file(char *); /*proto*/
 static void __pyx_f_9hack_core_close_file(FILE *); /*proto*/
 static int __pyx_f_9hack_core_read_text_file(FILE *, char *); /*proto*/
 static int __pyx_f_9hack_core_read_binary_file(FILE *, char *); /*proto*/
-static char *__pyx_f_9hack_core_get_stdin(int); /*proto*/
+static int __pyx_f_9hack_core_get_stdin(char *); /*proto*/
 static int __pyx_f_9hack_core_check_text_file(char *, char *); /*proto*/
 static int __pyx_f_9hack_core_check_binary_file(char *, char *); /*proto*/
 static void __pyx_f_9hack_core_print_file(char *); /*proto*/
@@ -1226,7 +1226,7 @@ static PyObject *__pyx_codeobj__5;
  * 
  * def hack():             # <<<<<<<<<<<<<<
  *     cdef str fn
- *     cdef char* c
+ *     cdef char c[0x40]
  */
 
 /* Python wrapper */
@@ -1245,7 +1245,7 @@ static PyObject *__pyx_pw_9hack_core_1hack(PyObject *__pyx_self, CYTHON_UNUSED P
 
 static PyObject *__pyx_pf_9hack_core_hack(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_v_fn = 0;
-  char *__pyx_v_c;
+  char __pyx_v_c[0x40];
   char __pyx_v_b[0x20];
   char __pyx_v_re[0x20];
   char __pyx_v_f[0x20];
@@ -1265,16 +1265,16 @@ static PyObject *__pyx_pf_9hack_core_hack(CYTHON_UNUSED PyObject *__pyx_self) {
 
   /* "hack_core.pyx":13
  *     cdef str fn
- *     cdef char* c
- *     c = get_stdin(0x40)             # <<<<<<<<<<<<<<
+ *     cdef char c[0x40]
+ *     get_stdin(c)             # <<<<<<<<<<<<<<
  *     fn = sys.argv[0][:-3]
  *     cdef char b[0x20]
  */
-  __pyx_v_c = __pyx_f_9hack_core_get_stdin(0x40);
+  (void)(__pyx_f_9hack_core_get_stdin(__pyx_v_c));
 
   /* "hack_core.pyx":14
- *     cdef char* c
- *     c = get_stdin(0x40)
+ *     cdef char c[0x40]
+ *     get_stdin(c)
  *     fn = sys.argv[0][:-3]             # <<<<<<<<<<<<<<
  *     cdef char b[0x20]
  *     strcpy(b, b'..\\..\\data\\')
@@ -1515,7 +1515,7 @@ static PyObject *__pyx_pf_9hack_core_hack(CYTHON_UNUSED PyObject *__pyx_self) {
  * 
  * def hack():             # <<<<<<<<<<<<<<
  *     cdef str fn
- *     cdef char* c
+ *     cdef char c[0x40]
  */
 
   /* function exit code */
@@ -2229,7 +2229,7 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
  *     text[i]=0
  *     return i             # <<<<<<<<<<<<<<
  * 
- * cdef char* get_stdin(int size):
+ * cdef int get_stdin(char* s):
  */
   __pyx_r = __pyx_v_i;
   goto __pyx_L0;
@@ -2251,40 +2251,30 @@ static int __pyx_f_9hack_core_read_binary_file(FILE *__pyx_v_pf, char *__pyx_v_t
 /* "hack_core.pyx":117
  *     return i
  * 
- * cdef char* get_stdin(int size):             # <<<<<<<<<<<<<<
- *     cdef char* s
+ * cdef int get_stdin(char* s):             # <<<<<<<<<<<<<<
  *     cdef int c,i
+ *     i=0
  */
 
-static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
-  char *__pyx_v_s;
+static int __pyx_f_9hack_core_get_stdin(char *__pyx_v_s) {
   int __pyx_v_c;
   int __pyx_v_i;
-  char *__pyx_r;
+  int __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("get_stdin", 0);
 
-  /* "hack_core.pyx":120
- *     cdef char* s
+  /* "hack_core.pyx":119
+ * cdef int get_stdin(char* s):
  *     cdef int c,i
- *     s = <char*>malloc(size+1)             # <<<<<<<<<<<<<<
- *     i=0
- *     while True:
- */
-  __pyx_v_s = ((char *)malloc((__pyx_v_size + 1)));
-
-  /* "hack_core.pyx":121
- *     cdef int c,i
- *     s = <char*>malloc(size+1)
  *     i=0             # <<<<<<<<<<<<<<
  *     while True:
  *         c = getchar()
  */
   __pyx_v_i = 0;
 
-  /* "hack_core.pyx":122
- *     s = <char*>malloc(size+1)
+  /* "hack_core.pyx":120
+ *     cdef int c,i
  *     i=0
  *     while True:             # <<<<<<<<<<<<<<
  *         c = getchar()
@@ -2292,7 +2282,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
   while (1) {
 
-    /* "hack_core.pyx":123
+    /* "hack_core.pyx":121
  *     i=0
  *     while True:
  *         c = getchar()             # <<<<<<<<<<<<<<
@@ -2301,7 +2291,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
     __pyx_v_c = getchar();
 
-    /* "hack_core.pyx":124
+    /* "hack_core.pyx":122
  *     while True:
  *         c = getchar()
  *         if c == EOF: break             # <<<<<<<<<<<<<<
@@ -2313,7 +2303,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
       goto __pyx_L4_break;
     }
 
-    /* "hack_core.pyx":125
+    /* "hack_core.pyx":123
  *         c = getchar()
  *         if c == EOF: break
  *         if c == b'\r': continue             # <<<<<<<<<<<<<<
@@ -2325,7 +2315,7 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
       goto __pyx_L3_continue;
     }
 
-    /* "hack_core.pyx":126
+    /* "hack_core.pyx":124
  *         if c == EOF: break
  *         if c == b'\r': continue
  *         s[i]=c             # <<<<<<<<<<<<<<
@@ -2334,43 +2324,43 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
  */
     (__pyx_v_s[__pyx_v_i]) = __pyx_v_c;
 
-    /* "hack_core.pyx":127
+    /* "hack_core.pyx":125
  *         if c == b'\r': continue
  *         s[i]=c
  *         i += 1             # <<<<<<<<<<<<<<
  *     s[i]=0
- *     return s
+ *     return i
  */
     __pyx_v_i = (__pyx_v_i + 1);
     __pyx_L3_continue:;
   }
   __pyx_L4_break:;
 
-  /* "hack_core.pyx":128
+  /* "hack_core.pyx":126
  *         s[i]=c
  *         i += 1
  *     s[i]=0             # <<<<<<<<<<<<<<
- *     return s
+ *     return i
  * 
  */
   (__pyx_v_s[__pyx_v_i]) = 0;
 
-  /* "hack_core.pyx":129
+  /* "hack_core.pyx":127
  *         i += 1
  *     s[i]=0
- *     return s             # <<<<<<<<<<<<<<
+ *     return i             # <<<<<<<<<<<<<<
  * 
  * cdef int check_text_file(char* fn, char* expect):
  */
-  __pyx_r = __pyx_v_s;
+  __pyx_r = __pyx_v_i;
   goto __pyx_L0;
 
   /* "hack_core.pyx":117
  *     return i
  * 
- * cdef char* get_stdin(int size):             # <<<<<<<<<<<<<<
- *     cdef char* s
+ * cdef int get_stdin(char* s):             # <<<<<<<<<<<<<<
  *     cdef int c,i
+ *     i=0
  */
 
   /* function exit code */
@@ -2379,8 +2369,8 @@ static char *__pyx_f_9hack_core_get_stdin(int __pyx_v_size) {
   return __pyx_r;
 }
 
-/* "hack_core.pyx":131
- *     return s
+/* "hack_core.pyx":129
+ *     return i
  * 
  * cdef int check_text_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
  *     cdef FILE* fp = open_text_file(fn)
@@ -2394,7 +2384,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("check_text_file", 0);
 
-  /* "hack_core.pyx":132
+  /* "hack_core.pyx":130
  * 
  * cdef int check_text_file(char* fn, char* expect):
  *     cdef FILE* fp = open_text_file(fn)             # <<<<<<<<<<<<<<
@@ -2403,7 +2393,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_text_file(__pyx_v_fn);
 
-  /* "hack_core.pyx":134
+  /* "hack_core.pyx":132
  *     cdef FILE* fp = open_text_file(fn)
  *     cdef char fc[0x20]
  *     read_text_file(fp, fc)             # <<<<<<<<<<<<<<
@@ -2412,7 +2402,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  */
   (void)(__pyx_f_9hack_core_read_text_file(__pyx_v_fp, __pyx_v_fc));
 
-  /* "hack_core.pyx":135
+  /* "hack_core.pyx":133
  *     cdef char fc[0x20]
  *     read_text_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
@@ -2421,7 +2411,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":136
+  /* "hack_core.pyx":134
  *     read_text_file(fp, fc)
  *     close_file(fp)
  *     return strcmp(fc, expect) == 0             # <<<<<<<<<<<<<<
@@ -2431,8 +2421,8 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
   __pyx_r = (strcmp(__pyx_v_fc, __pyx_v_expect) == 0);
   goto __pyx_L0;
 
-  /* "hack_core.pyx":131
- *     return s
+  /* "hack_core.pyx":129
+ *     return i
  * 
  * cdef int check_text_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
  *     cdef FILE* fp = open_text_file(fn)
@@ -2445,7 +2435,7 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
   return __pyx_r;
 }
 
-/* "hack_core.pyx":138
+/* "hack_core.pyx":136
  *     return strcmp(fc, expect) == 0
  * 
  * cdef int check_binary_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
@@ -2460,7 +2450,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("check_binary_file", 0);
 
-  /* "hack_core.pyx":139
+  /* "hack_core.pyx":137
  * 
  * cdef int check_binary_file(char* fn, char* expect):
  *     cdef FILE* fp = open_binary_file(fn)             # <<<<<<<<<<<<<<
@@ -2469,7 +2459,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_binary_file(__pyx_v_fn);
 
-  /* "hack_core.pyx":141
+  /* "hack_core.pyx":139
  *     cdef FILE* fp = open_binary_file(fn)
  *     cdef char fc[0x400]
  *     read_binary_file(fp, fc)             # <<<<<<<<<<<<<<
@@ -2478,7 +2468,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  */
   (void)(__pyx_f_9hack_core_read_binary_file(__pyx_v_fp, __pyx_v_fc));
 
-  /* "hack_core.pyx":142
+  /* "hack_core.pyx":140
  *     cdef char fc[0x400]
  *     read_binary_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
@@ -2487,7 +2477,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":143
+  /* "hack_core.pyx":141
  *     read_binary_file(fp, fc)
  *     close_file(fp)
  *     return strcmp(fc, expect) == 0             # <<<<<<<<<<<<<<
@@ -2497,7 +2487,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   __pyx_r = (strcmp(__pyx_v_fc, __pyx_v_expect) == 0);
   goto __pyx_L0;
 
-  /* "hack_core.pyx":138
+  /* "hack_core.pyx":136
  *     return strcmp(fc, expect) == 0
  * 
  * cdef int check_binary_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
@@ -2511,7 +2501,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   return __pyx_r;
 }
 
-/* "hack_core.pyx":145
+/* "hack_core.pyx":143
  *     return strcmp(fc, expect) == 0
  * 
  * cdef void print_file(char* fn):             # <<<<<<<<<<<<<<
@@ -2530,7 +2520,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("print_file", 0);
 
-  /* "hack_core.pyx":146
+  /* "hack_core.pyx":144
  * 
  * cdef void print_file(char* fn):
  *     cdef FILE* fp = open_text_file(fn)             # <<<<<<<<<<<<<<
@@ -2539,7 +2529,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_text_file(__pyx_v_fn);
 
-  /* "hack_core.pyx":148
+  /* "hack_core.pyx":146
  *     cdef FILE* fp = open_text_file(fn)
  *     cdef char fc[0x400]
  *     read_text_file(fp, fc)             # <<<<<<<<<<<<<<
@@ -2548,7 +2538,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
  */
   (void)(__pyx_f_9hack_core_read_text_file(__pyx_v_fp, __pyx_v_fc));
 
-  /* "hack_core.pyx":149
+  /* "hack_core.pyx":147
  *     cdef char fc[0x400]
  *     read_text_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
@@ -2557,21 +2547,21 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
  */
   __pyx_f_9hack_core_close_file(__pyx_v_fp);
 
-  /* "hack_core.pyx":150
+  /* "hack_core.pyx":148
  *     read_text_file(fp, fc)
  *     close_file(fp)
  *     print(fc.decode())             # <<<<<<<<<<<<<<
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):
  */
-  __pyx_t_1 = __Pyx_decode_c_string(__pyx_v_fc, 0, strlen(__pyx_v_fc), NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_c_string(__pyx_v_fc, 0, strlen(__pyx_v_fc), NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "hack_core.pyx":145
+  /* "hack_core.pyx":143
  *     return strcmp(fc, expect) == 0
  * 
  * cdef void print_file(char* fn):             # <<<<<<<<<<<<<<
@@ -2589,7 +2579,7 @@ static void __pyx_f_9hack_core_print_file(char *__pyx_v_fn) {
   __Pyx_RefNannyFinishContext();
 }
 
-/* "hack_core.pyx":152
+/* "hack_core.pyx":150
  *     print(fc.decode())
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):             # <<<<<<<<<<<<<<
@@ -2602,7 +2592,7 @@ static void __pyx_f_9hack_core_slice_string(char *__pyx_v_s, size_t __pyx_v_off,
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("slice_string", 0);
 
-  /* "hack_core.pyx":153
+  /* "hack_core.pyx":151
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):
  *     cdef size_t l = strlen(s) - off             # <<<<<<<<<<<<<<
@@ -2611,7 +2601,7 @@ static void __pyx_f_9hack_core_slice_string(char *__pyx_v_s, size_t __pyx_v_off,
  */
   __pyx_v_l = (strlen(__pyx_v_s) - __pyx_v_off);
 
-  /* "hack_core.pyx":154
+  /* "hack_core.pyx":152
  * cdef void slice_string(char* s, size_t off, char* dst):
  *     cdef size_t l = strlen(s) - off
  *     strncpy(dst, s, l)             # <<<<<<<<<<<<<<
@@ -2619,14 +2609,14 @@ static void __pyx_f_9hack_core_slice_string(char *__pyx_v_s, size_t __pyx_v_off,
  */
   (void)(strncpy(__pyx_v_dst, __pyx_v_s, __pyx_v_l));
 
-  /* "hack_core.pyx":155
+  /* "hack_core.pyx":153
  *     cdef size_t l = strlen(s) - off
  *     strncpy(dst, s, l)
  *     dst[l] = 0             # <<<<<<<<<<<<<<
  */
   (__pyx_v_dst[__pyx_v_l]) = 0;
 
-  /* "hack_core.pyx":152
+  /* "hack_core.pyx":150
  *     print(fc.decode())
  * 
  * cdef void slice_string(char* s, size_t off, char* dst):             # <<<<<<<<<<<<<<
@@ -2710,7 +2700,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_n_s_print); if (!__pyx_builtin_print) __PYX_ERR(0, 148, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -2721,8 +2711,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
   /* "hack_core.pyx":14
- *     cdef char* c
- *     c = get_stdin(0x40)
+ *     cdef char c[0x40]
+ *     get_stdin(c)
  *     fn = sys.argv[0][:-3]             # <<<<<<<<<<<<<<
  *     cdef char b[0x20]
  *     strcpy(b, b'..\\..\\data\\')
@@ -2736,7 +2726,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  * 
  * def hack():             # <<<<<<<<<<<<<<
  *     cdef str fn
- *     cdef char* c
+ *     cdef char c[0x40]
  */
   __pyx_tuple__2 = PyTuple_Pack(8, __pyx_n_s_fn, __pyx_n_s_c, __pyx_n_s_b, __pyx_n_s_re, __pyx_n_s_f, __pyx_n_s_s, __pyx_n_s_d, __pyx_n_s_h); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
@@ -3052,7 +3042,7 @@ if (!__Pyx_RefNanny) {
  * 
  * def hack():             # <<<<<<<<<<<<<<
  *     cdef str fn
- *     cdef char* c
+ *     cdef char c[0x40]
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_9hack_core_1hack, NULL, __pyx_n_s_hack_core); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
