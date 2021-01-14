@@ -135,7 +135,7 @@ cdef int check_text_file(char* fn, char* expect):
 
 cdef int check_binary_file(char* fn, char* expect):
     cdef FILE* fp = open_binary_file(fn)
-    cdef char fc[0x400]
+    cdef char fc[0xFFFF]
     read_binary_file(fp, fc)
     close_file(fp)
     return strcmp(fc, expect) == 0

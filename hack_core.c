@@ -2440,12 +2440,12 @@ static int __pyx_f_9hack_core_check_text_file(char *__pyx_v_fn, char *__pyx_v_ex
  * 
  * cdef int check_binary_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
  *     cdef FILE* fp = open_binary_file(fn)
- *     cdef char fc[0x400]
+ *     cdef char fc[0xFFFF]
  */
 
 static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_expect) {
   FILE *__pyx_v_fp;
-  char __pyx_v_fc[0x400];
+  char __pyx_v_fc[0xFFFF];
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("check_binary_file", 0);
@@ -2454,14 +2454,14 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  * 
  * cdef int check_binary_file(char* fn, char* expect):
  *     cdef FILE* fp = open_binary_file(fn)             # <<<<<<<<<<<<<<
- *     cdef char fc[0x400]
+ *     cdef char fc[0xFFFF]
  *     read_binary_file(fp, fc)
  */
   __pyx_v_fp = __pyx_f_9hack_core_open_binary_file(__pyx_v_fn);
 
   /* "hack_core.pyx":139
  *     cdef FILE* fp = open_binary_file(fn)
- *     cdef char fc[0x400]
+ *     cdef char fc[0xFFFF]
  *     read_binary_file(fp, fc)             # <<<<<<<<<<<<<<
  *     close_file(fp)
  *     return strcmp(fc, expect) == 0
@@ -2469,7 +2469,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
   (void)(__pyx_f_9hack_core_read_binary_file(__pyx_v_fp, __pyx_v_fc));
 
   /* "hack_core.pyx":140
- *     cdef char fc[0x400]
+ *     cdef char fc[0xFFFF]
  *     read_binary_file(fp, fc)
  *     close_file(fp)             # <<<<<<<<<<<<<<
  *     return strcmp(fc, expect) == 0
@@ -2492,7 +2492,7 @@ static int __pyx_f_9hack_core_check_binary_file(char *__pyx_v_fn, char *__pyx_v_
  * 
  * cdef int check_binary_file(char* fn, char* expect):             # <<<<<<<<<<<<<<
  *     cdef FILE* fp = open_binary_file(fn)
- *     cdef char fc[0x400]
+ *     cdef char fc[0xFFFF]
  */
 
   /* function exit code */
